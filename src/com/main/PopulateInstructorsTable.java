@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class PopulateInstructorsTable {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/Instructor Management System";
+    private static final String URL = "jdbc:mysql://localhost:3306/Instructor_Management_System";
     private static final String USER = "user";
     private static final String PASSWORD = "user";
 

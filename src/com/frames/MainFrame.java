@@ -4,17 +4,20 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.sql.*;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 
 public class MainFrame extends javax.swing.JFrame {
 
-    private final String URL = "jdbc:mysql://localhost:3306/instructor management system";
+    private final String URL = "jdbc:mysql://localhost:3306/Instructor_Management_System";
     private final String USER = "user";
     private final String PASSWORD = "user";
 
     public MainFrame() {
         initComponents();
         viewInstructorRecords(viewRecordsTable);
+        getInstructorCount();
+        displayLatestInstructor(latestRecordAddedTextArea);
     }
 
     @SuppressWarnings("unchecked")
@@ -34,7 +37,14 @@ public class MainFrame extends javax.swing.JFrame {
         contentPanel = new javax.swing.JPanel();
         dashBoardPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        totalInstructorCountLabel = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        totalViewMoreButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        latestRecordAddedTextArea = new javax.swing.JTextArea();
+        jLabel15 = new javax.swing.JLabel();
+        totalViewMoreButton1 = new javax.swing.JButton();
         addNewRecordPanel = new javax.swing.JPanel();
         fullNameField = new javax.swing.JTextField();
         phoneNumberField = new javax.swing.JTextField();
@@ -182,7 +192,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(logoutButton)
                 .addGap(18, 18, 18)
                 .addComponent(exitButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addContainerGap())
         );
@@ -196,26 +206,99 @@ public class MainFrame extends javax.swing.JFrame {
         dashBoardPanel.setBackground(new java.awt.Color(153, 255, 204));
         dashBoardPanel.setPreferredSize(new java.awt.Dimension(715, 488));
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        totalInstructorCountLabel.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        totalInstructorCountLabel.setText("0");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel2.setText("Total Instructor Count");
+
+        totalViewMoreButton.setText("View More");
+        totalViewMoreButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        totalViewMoreButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                totalViewMoreButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 325, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(59, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(47, 47, 47))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(totalInstructorCountLabel)
+                        .addGap(156, 156, 156))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(totalViewMoreButton)
+                        .addGap(127, 127, 127))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 252, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(jLabel2)
+                .addGap(29, 29, 29)
+                .addComponent(totalInstructorCountLabel)
+                .addGap(35, 35, 35)
+                .addComponent(totalViewMoreButton)
+                .addContainerGap(41, Short.MAX_VALUE))
         );
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        latestRecordAddedTextArea.setColumns(20);
+        latestRecordAddedTextArea.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        latestRecordAddedTextArea.setRows(5);
+        jScrollPane2.setViewportView(latestRecordAddedTextArea);
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel15.setText("Latest Record Added");
+
+        totalViewMoreButton1.setText("View More");
+        totalViewMoreButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        totalViewMoreButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                totalViewMoreButton1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 336, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 36, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addGap(47, 47, 47))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(totalViewMoreButton1)
+                                .addGap(114, 114, 114))))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 252, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel15)
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(totalViewMoreButton1)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout dashBoardPanelLayout = new javax.swing.GroupLayout(dashBoardPanel);
@@ -234,9 +317,9 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(dashBoardPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(225, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dashBoardPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(141, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -312,7 +395,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addGap(26, 26, 26)
                 .addComponent(jButton5)
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addContainerGap(176, Short.MAX_VALUE))
         );
 
         contentPanel.add(addNewRecordPanel, "card3");
@@ -386,7 +469,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(jButton6)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(viewRecordPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
                         .addContainerGap())))
         );
 
@@ -493,7 +576,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(saveEditDetailsButton)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
 
         contentPanel.add(editPanel, "card6");
@@ -536,7 +619,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jButton3)
                 .addGap(18, 18, 18)
                 .addComponent(jButton4)
-                .addContainerGap(233, Short.MAX_VALUE))
+                .addContainerGap(231, Short.MAX_VALUE))
         );
 
         contentPanel.add(settingsPanel, "card5");
@@ -628,6 +711,14 @@ public class MainFrame extends javax.swing.JFrame {
         searchField.setText("");
     }//GEN-LAST:event_saveEditDetailsButtonMouseClicked
 
+    private void totalViewMoreButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_totalViewMoreButtonMouseClicked
+        swapPanels(viewRecordPanel);
+    }//GEN-LAST:event_totalViewMoreButtonMouseClicked
+
+    private void totalViewMoreButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_totalViewMoreButton1MouseClicked
+        swapPanels(viewRecordPanel);
+    }//GEN-LAST:event_totalViewMoreButton1MouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JPanel addNewRecordPanel;
@@ -661,6 +752,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -671,6 +764,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea latestRecordAddedTextArea;
     private javax.swing.JButton logoutButton;
     private javax.swing.JPanel navPanel;
     private javax.swing.JTextField phoneNumberField;
@@ -679,6 +774,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField searchField;
     private javax.swing.JButton settingsButton;
     private javax.swing.JPanel settingsPanel;
+    private javax.swing.JLabel totalInstructorCountLabel;
+    private javax.swing.JButton totalViewMoreButton;
+    private javax.swing.JButton totalViewMoreButton1;
     private javax.swing.JButton viewButton;
     private javax.swing.JPanel viewRecordPanel;
     private javax.swing.JButton viewRecordsButton;
@@ -971,6 +1069,51 @@ public class MainFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Error updating instructor details: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 System.out.println("Error updating instructor details: " + ex.getMessage());
             }
+        }
+    }
+
+    private void getInstructorCount() {
+        int count = 0;
+
+        String query = "SELECT COUNT(*) AS total FROM instructors";
+
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD); PreparedStatement pstmt = conn.prepareStatement(query); ResultSet rs = pstmt.executeQuery()) {
+
+            if (rs.next()) {
+                count = rs.getInt("total");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        totalInstructorCountLabel.setText(count + "");
+    }
+
+    public void displayLatestInstructor(JTextArea textArea) {
+        String query = "SELECT fullName, phoneNumber, email, expertise, bio, created_at "
+                + "FROM instructors ORDER BY created_at DESC LIMIT 1";
+
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD); PreparedStatement pstmt = conn.prepareStatement(query); ResultSet rs = pstmt.executeQuery()) {
+
+            if (rs.next()) {
+                String fullName = rs.getString("fullName");
+                String phoneNumber = rs.getString("phoneNumber");
+                String email = rs.getString("email");
+                String expertise = rs.getString("expertise");
+                String bio = rs.getString("bio");
+                String createdAt = rs.getTimestamp("created_at").toString();
+
+                // Format the details to display in the text area
+                String instructorDetails = String.format(
+                        "Full Name: %s\nPhone Number: %s\nEmail: %s\nExpertise: %s\nBio: %s\nCreated At: %s",
+                        fullName, phoneNumber, email, expertise, bio, createdAt);
+
+                textArea.setText(instructorDetails);
+            } else {
+                textArea.setText("No instructor records found.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+            textArea.setText("Error retrieving latest instructor details.");
         }
     }
 }
